@@ -13,8 +13,8 @@ homeassistant:
 
 # SSL Configuration - BH 10/24/20
 http:
-  ssl_certificate: /certs/live/tornado14.org/fullchain.pem
-  ssl_key: /certs/live/tornado14.org/privkey.pem
+  ssl_certificate: !secret ssl_certificate
+  ssl_key: !secret ssl_key
 # Proxy config - BH 8/27/2021
   use_x_forwarded_for: true
   trusted_proxies:
