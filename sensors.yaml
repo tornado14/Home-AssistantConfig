@@ -1,0 +1,158 @@
+- platform: template
+  sensors:
+      luna_goal_minutes:
+        friendly_name: "Activity Goal"
+        icon_template: mdi:trophy-outline
+        value_template: '{{ state_attr("device_tracker.whistle_luna", "activity_goal") }}'
+        unit_of_measurement: "minutes"
+      luna_goal_streak:
+        friendly_name: "Activity Streak"
+        icon_template: mdi:chart-timeline
+        value_template: '{{ state_attr("device_tracker.whistle_luna", "activity_streak") }}'
+        unit_of_measurement: "days"
+      luna_active_minutes:
+        friendly_name: "Active For"
+        icon_template: mdi:dog-side
+        value_template: '{{ state_attr("device_tracker.whistle_luna", "activity_minutes_active") }}'
+        unit_of_measurement: "minutes"
+      luna_rest_minutes:
+        friendly_name: "Rest For"
+        icon_template: mdi:sleep
+        value_template: '{{ state_attr("device_tracker.whistle_luna", "activity_minutes_rest") }}'
+        unit_of_measurement: "minutes"
+      luna_battery_level:
+        friendly_name: "Battery Level"
+        icon_template: mdi:battery
+        value_template: '{{ state_attr("device_tracker.whistle_luna", "battery_level") }}'
+        unit_of_measurement: '%'
+      luna_distance:
+        friendly_name: "Distance"
+        icon_template: mdi:map-marker-distance
+        value_template: '{{ state_attr("device_tracker.whistle_luna", "activity_distance") | round(1) }}'
+        unit_of_measurement: 'miles'
+      luna_calories:
+        friendly_name: "Calories"
+        icon_template: mdi:run
+        value_template: '{{ state_attr("device_tracker.whistle_luna", "activity_calories") | round(1) }}'
+        unit_of_measurement: 'calories'
+      luna_battery_days_left:
+        friendly_name: "Battery Days Left"
+        icon_template: mdi:calendar-clock
+        value_template: '{{ state_attr("device_tracker.whistle_luna", "battery_days_left") }}'
+        unit_of_measurement: 'days'
+      luna_battery_24h_wifi_usage:
+        friendly_name: "Battery WiFi Usage"
+        icon_template: mdi:wifi
+        value_template: '{{ state_attr("device_tracker.whistle_luna", "24h_battery_wifi_usage") }}'
+        unit_of_measurement: '%'
+      luna_battery_24h_cell_usage:
+        friendly_name: "Battery Cellular Usage"
+        icon_template: mdi:cellphone-basic
+        value_template: '{{ state_attr("device_tracker.whistle_luna", "24h_battery_cellular_usage") }}'
+        unit_of_measurement: '%'
+      molly_goal_minutes:
+        friendly_name: "Activity Goal"
+        icon_template: mdi:trophy-outline
+        value_template: '{{ state_attr("device_tracker.whistle_molly", "activity_goal") }}'
+        unit_of_measurement: "minutes"
+      molly_goal_streak:
+        friendly_name: "Activity Streak"
+        icon_template: mdi:chart-timeline
+        value_template: '{{ state_attr("device_tracker.whistle_molly", "activity_streak") }}'
+        unit_of_measurement: "days"
+      molly_active_minutes:
+        friendly_name: "Active For"
+        icon_template: mdi:dog-side
+        value_template: '{{ state_attr("device_tracker.whistle_molly", "activity_minutes_active") }}'
+        unit_of_measurement: "minutes"
+      molly_rest_minutes:
+        friendly_name: "Rest For"
+        icon_template: mdi:sleep
+        value_template: '{{ state_attr("device_tracker.whistle_molly", "activity_minutes_rest") }}'
+        unit_of_measurement: "minutes"
+      molly_battery_level:
+        friendly_name: "Battery Level"
+        icon_template: mdi:battery
+        value_template: '{{ state_attr("device_tracker.whistle_molly", "battery_level") }}'
+        unit_of_measurement: '%'
+      molly_distance:
+        friendly_name: "Distance"
+        icon_template: mdi:map-marker-distance
+        value_template: '{{ state_attr("device_tracker.whistle_molly", "activity_distance") | round(1) }}'
+        unit_of_measurement: 'miles'
+      molly_calories:
+        friendly_name: "Calories"
+        icon_template: mdi:run
+        value_template: '{{ state_attr("device_tracker.whistle_molly", "activity_calories") | round(1) }}'
+        unit_of_measurement: 'calories'
+      molly_battery_days_left:
+        friendly_name: "Battery Days Left"
+        icon_template: mdi:calendar-clock
+        value_template: '{{ state_attr("device_tracker.whistle_molly", "battery_days_left") }}'
+        unit_of_measurement: 'days'
+      molly_battery_24h_wifi_usage:
+        friendly_name: "Battery WiFi Usage"
+        icon_template: mdi:wifi
+        value_template: '{{ state_attr("device_tracker.whistle_molly", "24h_battery_wifi_usage") }}'
+        unit_of_measurement: '%'
+      molly_battery_24h_cell_usage:
+        friendly_name: "Battery Cellular Usage"
+        icon_template: mdi:cellphone-basic
+        value_template: '{{ state_attr("device_tracker.whistle_molly", "24h_battery_cellular_usage") }}'
+        unit_of_measurement: '%'
+      brandon_step_goal:
+        friendly_name: "Brandon Step Goal"
+        icon_template: mdi:paw
+        value_template: '{{ (100 - ((states.sensor.total_steps|int) / (states.sensor.daily_step_goal|int) *100))|round(1) }}'
+        unit_of_measurement: '%'
+
+#- platform: aarlo
+#  monitored_conditions:
+#  - total_cameras
+#  - last_capture
+#  - recent_activity
+#  - captured_today
+#  - battery_level
+#  - signal_strength
+#  - temperature
+#  - humidity
+#  - air_quality
+  
+- platform: google_geocode
+  name: Brandon_iPhone
+  origin: device_tracker.brandons_iphone_13
+  options: formated_address
+  gravatar: !secret brandon_email
+  api_key: !secret googlemaps_api
+  display_zone: hide
+  
+- platform: google_geocode
+  name: Panda_Mobile
+  origin: device_tracker.saturn
+  options: street_number, street, city
+  image: mdi:panda
+  api_key: !secret googlemaps_api
+  display_zone: hide
+
+- platform: google_geocode
+  name: Tiger
+  origin: person.meg_hunnicutt
+  options: street_number, street, city
+  image: mdi:tiger
+  api_key: !secret googlemaps_api
+  display_zone: hide
+
+- platform: google_geocode
+  name: Panda
+  origin: person.brandon_hunnicutt
+  options: street_number, street, city
+  image: mdi:panda
+  api_key: !secret googlemaps_api
+  display_zone: hide
+
+- platform: github
+  access_token: !secret github_pat
+  repositories:
+    - path: 'tornado14/cgm-remote-monitor'
+    - path: 'LoopKit/LoopWorkspace'
+

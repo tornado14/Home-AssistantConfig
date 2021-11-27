@@ -1,0 +1,5 @@
+- platform: whistle
+  username: !secret whistle_username
+  password: !secret whistle_password
+
+

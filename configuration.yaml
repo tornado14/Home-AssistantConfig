@@ -1,0 +1,94 @@
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+homeassistant:
+  latitude: !secret latitude
+  longitude: !secret longitude
+  elevation: !secret elevation
+  unit_system: imperial
+  time_zone: America/Denver
+  external_url: !secret external_url
+  customize: !include customize.yaml
+
+# SSL Configuration - BH 10/24/20
+http:
+  ssl_certificate: /certs/live/tornado14.org/fullchain.pem
+  ssl_key: /certs/live/tornado14.org/privkey.pem
+# Proxy config - BH 8/27/2021
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 172.16.0.0/12
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+sensor: !include sensors.yaml
+device_tracker: !include device_trackers.yaml
+binary_sensor: !include binary_sensors.yaml
+
+eight_sleep:
+  username: !secret eight_user
+  password: !secret eight_pass
+
+logger:
+  default: warning
+  logs:
+    homeassistant.components.totalconnect: debug
+
+withings:
+  client_id: !secret withings_client_id
+  client_secret: !secret withings_client_secret
+
+# Example configuration.yaml entry
+template:
+  - sensor:
+    - name: Withings weight lbs Brandon
+      unit_of_measurement: "lbs"
+      state: >-
+        {{
+          (states('sensor.withings_weight_kg_Brandon') | float(0) * 2.20462262185)
+          | round(2, default=0)
+        }}
+      icon: "mdi:weight-pound"
+
+    - name: Withings bone mass lbs Brandon
+      unit_of_measurement: "lbs"
+      state: >-
+        {{
+          (states('sensor.withings_bone_mass_kg_Brandon') | float(0) * 2.20462262185)
+          | round(2, default=0)
+        }}
+      icon: "mdi:weight-pound"
+
+    - name: Withings fat free mass lbs Brandon
+      unit_of_measurement: "lbs"
+      state: >-
+        {{
+          (states('sensor.withings_fat_free_mass_kg_Brandon') | float(0) * 2.20462262185)
+          | round(2, default=0)
+         }}
+      icon: "mdi:weight-pound"
+
+    - name: Withings fat mass lbs Brandon
+      unit_of_measurement: "lbs"
+      state: >-
+        {{
+          (states('sensor.withings_fat_mass_kg_Brandon') | float(0) * 2.20462262185)
+          | round(2, default=0)
+        }}
+      icon: "mdi:weight-pound"
+
+    - name: Withings muscle mass lbs Brandon
+      unit_of_measurement: "lbs"
+      state: >-
+        {{
+          (states('sensor.withings_muscle_mass_kg_Brandon') | float(0) * 2.20462262185)
+          | round(2, default=0)
+        }}
+      icon: "mdi:weight-pound"

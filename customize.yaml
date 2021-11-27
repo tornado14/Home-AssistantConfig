@@ -1,0 +1,12 @@
+device_tracker.whistle_luna:
+  friendly_name: Luna
+  entity_picture: https://d6bhhyzmg4iui.cloudfront.net/dog-194838-photo/_60x60_thsbw3.png
+device_tracker.whistle_molly:
+  friendly_name: Molly
+  entity_picture: https://d6bhhyzmg4iui.cloudfront.net/dog-198319-photo/_60x60_2dreye.png
+device_tracker.iphone:
+  friendly_name: Meg iPhone
+person.brandon_hunnicutt:
+  entity_picture: https://en.gravatar.com/userimage/143873731/3df656f44ce008d71418ed2aa2e0973b.jpeg
+sensor.dexcom_tornado14_glucose_value:
+  friendly_name: Brandon's Sugar
